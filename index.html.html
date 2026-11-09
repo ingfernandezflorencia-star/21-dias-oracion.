@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="es" class="h-full">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>21 Días de Oración - Una Carrera que Trasciende</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Plus Jakarta Sans & Cormorant Garamond -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,500&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        serif: ['Cormorant Garamond', 'serif'],
+                    },
+                    colors: {
+                        cplm: {
+                            navy: '#0B0D1B',
+                            darkBlue: '#12162E',
+                            cardBg: '#181E3B',
+                            lightBg: '#F4F5FB',
+                            pink: '#E91E63',
+                            pinkGlow: '#FF2A7A',
+                            magenta: '#C2185B',
+                            softPink: '#FCE4EC',
+                            purple: '#7C4DFF',
+                            accent: '#FF4081'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(233, 30, 99, 0.4);
+            border-radius: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(233, 30, 99, 0.7);
+        }
+        .glow-pink {
+            box-shadow: 0 0 25px -5px rgba(233, 30, 99, 0.4);
+        }
+        .glow-pink-hover:hover {
+            box-shadow: 0 0 30px -2px rgba(255, 42, 122, 0.5);
+        }
+        .bg-glass {
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+        }
+    </style>
+</head>
+<body class="bg-cplm-lightBg dark:bg-cplm-navy text-slate-800 dark:text-slate-100 min-h-full flex flex-col font-sans transition-colors duration-300">
+
+    <!-- Header Navigation -->
+    <header class="sticky top-0 z-30 bg-white/80 dark:bg-cplm-darkBlue/80 backdrop-blur-md border-b border-cplm-softPink dark:border-slate-800/80 transition-colors duration-300">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3.5">
+                <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-cplm-pinkGlow via-cplm-magenta to-cplm-purple flex items-center justify-center text-white shadow-lg glow-pink">
+                    <i class="fa-solid fa-person-running text-xl"></i>
+                </div>
+                <div>
+                    <div class="flex items-center gap-2">
+                        <span class="text-[10px] uppercase tracking-widest font-extrabold px-2 py-0.5 rounded bg-cplm-pink/10 dark:bg-cplm-pink/20 text-cplm-pink dark:text-cplm-pinkGlow">HILLSONG</span>
+                        <span class="text-xs text-slate-400 font-semibold">• 21 DÍAS</span>
+                    </div>
+                    <h1 class="font-serif text-xl sm:text-2xl font-bold tracking-tight text-slate-900 dark:text-white">Una Carrera que Trasciende</h1>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                <button id="exportBtn" onclick="exportData()" class="p-2.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-200 bg-white dark:bg-cplm-cardBg hover:bg-cplm-softPink/40 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700/80 rounded-xl shadow-sm transition flex items-center gap-2">
+                    <i class="fa-solid fa-file-arrow-down text-cplm-pink"></i>
+                    <span class="hidden sm:inline">Exportar Diario</span>
+                </button>
+                <button id="copyAllBtn" onclick="copyAllNotes()" class="p-2.5 sm:px-4 sm:py-2 text-xs sm:text-sm font-semibold text-slate-700 dark:text-slate-200 bg-white dark:bg-cplm-cardBg hover:bg-cplm-softPink/40 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-700/80 rounded-xl shadow-sm transition flex items-center gap-2">
+                    <i class="fa-solid fa-copy text-cplm-pink"></i>
+                    <span class="hidden sm:inline">Copiar Todo</span>
+                </button>
+                <button id="themeToggle" onclick="toggleTheme()" class="p-2.5 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-cplm-cardBg rounded-xl transition">
+                    <i class="fa-solid fa-moon dark:hidden text-cplm-navy"></i>
+                    <i class="fa-solid fa-sun hidden dark:inline text-cplm-pinkGlow"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-6xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Hero Banner -->
+        <section class="relative bg-gradient-to-r from-cplm-navy via-cplm-darkBlue to-cplm-magenta rounded-3xl p-6 sm:p-10 text-white shadow-2xl border border-white/10 mb-10 overflow-hidden">
+            <div class="absolute -right-12 -bottom-12 w-64 h-64 rounded-full bg-cplm-pinkGlow/30 blur-3xl pointer-events-none"></div>
+            <div class="absolute left-1/3 -top-12 w-48 h-48 rounded-full bg-cplm-purple/30 blur-3xl pointer-events-none"></div>
+
+            <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-8">
+                <div class="max-w-xl">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-white/10 backdrop-blur-md mb-4 text-cplm-softPink border border-white/15">
+                        <i class="fa-solid fa-flag-checkered text-cplm-pinkGlow"></i> PLAN DEVOCIONAL HILLSONG
+                    </div>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold leading-tight">Una Carrera que Trasciende</h2>
+                    <p class="mt-3 text-slate-300 text-sm sm:text-base font-normal leading-relaxed">
+                        Corramos con paciencia la carrera que tenemos por delante. 21 días de oración, alineación espiritual y construcción de un legado eterno.
+                    </p>
+                </div>
+
+                <!-- Progress Widget -->
+                <div class="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl p-5 sm:p-6 min-w-[270px] flex flex-col justify-between shadow-lg">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs font-bold text-cplm-softPink uppercase tracking-wider">Tu Carrera</span>
+                        <span id="progressPercent" class="text-xs font-extrabold bg-cplm-pinkGlow text-white px-2.5 py-0.5 rounded-full shadow">0%</span>
+                    </div>
+                    <div class="flex items-baseline gap-2 mb-4">
+                        <span id="completedCount" class="text-4xl font-extrabold font-sans text-white">0</span>
+                        <span class="text-slate-300 text-sm font-medium">de 21 días completados</span>
+                    </div>
+                    <div class="w-full bg-slate-900/50 rounded-full h-3 overflow-hidden p-0.5 border border-white/10">
+                        <div id="progressBar" class="bg-gradient-to-r from-cplm-pinkGlow via-cplm-pink to-cplm-purple h-2 rounded-full transition-all duration-500 ease-out" style="width: 0%"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filters Header -->
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8">
+            <div>
+                <h3 class="font-serif text-2xl font-bold text-slate-900 dark:text-white flex items-center gap-2.5">
+                    <i class="fa-solid fa-map-location-dot text-cplm-pink"></i>
+                    Recorrido de Oración
+                </h3>
+                <p class="text-xs text-slate-500 dark:text-slate-400">Dividido en 3 etapas fundamentales hacia la meta.</p>
+            </div>
+            
+            <div class="flex items-center gap-2 w-full sm:w-auto overflow-x-auto pb-1 sm:pb-0">
+                <button onclick="setFilter('all')" id="filterAll" class="filter-btn px-4 py-2 text-xs font-bold rounded-xl bg-cplm-pink text-white shadow-md transition">Todos</button>
+                <button onclick="setFilter('pending')" id="filterPending" class="filter-btn px-4 py-2 text-xs font-bold rounded-xl bg-white dark:bg-cplm-cardBg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 transition">Pendientes</button>
+                <button onclick="setFilter('completed')" id="filterCompleted" class="filter-btn px-4 py-2 text-xs font-bold rounded-xl bg-white dark:bg-cplm-cardBg text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 transition">Completados</button>
+            </div>
+        </div>
+
+        <!-- Weekly Container Grid -->
+        <div id="weeksContainer" class="space-y-10">
+            <!-- Dynamically populated by JS -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-auto border-t border-slate-200 dark:border-slate-800/80 py-8 bg-white dark:bg-cplm-darkBlue transition-colors">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <p class="text-xs font-semibold text-cplm-pink uppercase tracking-widest mb-1">Una Carrera que Trasciende — Hillsong</p>
+            <p class="text-xs text-slate-500 dark:text-slate-400">"Corramos con perseverancia la carrera que tenemos por delante, fijando la mirada en Jesús." — Hebreos 12:1-2</p>
+        </div>
+    </footer>
+
+    <!-- Day Detail Modal -->
+    <div id="dayModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-cplm-navy/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
+        <div id="modalContainer" class="bg-white dark:bg-cplm-darkBlue w-full max-w-2xl rounded-3xl shadow-2xl border border-cplm-softPink dark:border-slate-800 overflow-hidden transform scale-95 transition-transform duration-300 flex flex-col max-h-[90vh]">
+            
+            <!-- Modal Header -->
+            <div class="p-6 bg-gradient-to-r from-cplm-softPink/60 via-white to-white dark:from-cplm-cardBg dark:via-cplm-darkBlue dark:to-cplm-darkBlue border-b border-slate-200 dark:border-slate-800 flex items-start justify-between">
+                <div>
+                    <div class="flex items-center gap-2 mb-2">
+                        <span id="modalWeekTag" class="text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-md bg-cplm-pink/15 text-cplm-pink dark:text-cplm-pinkGlow">SEMANA 1</span>
+                        <span id="modalDayBadge" class="text-xs font-extrabold uppercase tracking-wider text-white bg-gradient-to-r from-cplm-pink to-cplm-purple px-3 py-0.5 rounded-full shadow-sm">Día 01</span>
+                        <span id="modalStatusBadge" class="text-xs font-bold text-slate-400 flex items-center gap-1 ml-2">
+                            <i class="fa-regular fa-circle"></i> Pendiente
+                        </span>
+                    </div>
+                    <h3 id="modalDayTitle" class="font-serif text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">Título del Día</h3>
+                    <p id="modalVerse" class="text-xs sm:text-sm text-cplm-pink dark:text-cplm-pinkGlow font-semibold italic mt-1"></p>
+                </div>
+                <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 transition">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <!-- Modal Content -->
+            <div class="p-6 overflow-y-auto custom-scrollbar flex-1 space-y-6">
+                
+                <!-- Question / Prompt -->
+                <div class="bg-gradient-to-r from-cplm-pink/10 to-cplm-purple/10 border-l-4 border-cplm-pink p-4 rounded-r-2xl">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-cplm-pink dark:text-cplm-pinkGlow mb-1 flex items-center gap-2">
+                        <i class="fa-solid fa-compass"></i> Pregunta Disparadora
+                    </h4>
+                    <p id="modalQuestion" class="text-sm font-semibold text-slate-800 dark:text-slate-200 italic"></p>
+                </div>
+
+                <!-- Devotional Text -->
+                <div class="space-y-3">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-2">
+                        <i class="fa-solid fa-book-open text-cplm-pink"></i> Devocional Diario
+                    </h4>
+                    <p id="modalDevotional" class="text-sm text-slate-700 dark:text-slate-300 leading-relaxed font-normal"></p>
+                </div>
+
+                <!-- Prayer Point -->
+                <div class="bg-slate-50 dark:bg-cplm-cardBg border border-slate-200/80 dark:border-slate-700/60 rounded-2xl p-4 sm:p-5">
+                    <h4 class="text-xs font-bold uppercase tracking-wider text-cplm-purple dark:text-cplm-pinkGlow mb-1.5 flex items-center gap-2">
+                        <i class="fa-solid fa-hands-praying"></i> Pauta de Oración
+                    </h4>
+                    <p id="modalPrayer" class="text-sm text-slate-700 dark:text-slate-200 italic leading-relaxed"></p>
+                </div>
+
+                <!-- Personal Notes Textarea -->
+                <div>
+                    <div class="flex items-center justify-between mb-2">
+                        <label for="modalNotes" class="block text-xs font-bold uppercase tracking-wider text-slate-600 dark:text-slate-300 flex items-center gap-2">
+                            <i class="fa-solid fa-pen-nib text-cplm-pink"></i> Mis Notas de Oración
+                        </label>
+                        <span id="saveStatus" class="text-xs text-slate-400 flex items-center gap-1">
+                            <i class="fa-solid fa-check text-emerald-500"></i> Guardado
+                        </span>
+                    </div>
+                    <textarea id="modalNotes" rows="5" placeholder="Escribe tus reflexiones personales, lo que Dios te habló hoy o tus peticiones de oración..." class="w-full p-4 rounded-2xl border border-slate-200 dark:border-slate-700/80 bg-slate-50 dark:bg-cplm-navy text-slate-800 dark:text-slate-100 text-sm focus:outline-none focus:ring-2 focus:ring-cplm-pink dark:focus:ring-cplm-pinkGlow transition shadow-inner resize-none"></textarea>
+                    <div class="flex justify-end mt-1">
+                        <span id="charCount" class="text-[11px] text-slate-400">0 caracteres</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="p-4 sm:p-6 bg-slate-50 dark:bg-cplm-darkBlue border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3">
+                <button id="toggleCompleteBtn" onclick="toggleCurrentDayComplete()" class="w-full sm:w-auto px-4 py-2.5 rounded-xl text-sm font-bold flex items-center justify-center gap-2 transition shadow-sm">
+                </button>
+                <div class="flex items-center gap-2 w-full sm:w-auto">
+                    <button onclick="copySingleNote()" class="flex-1 sm:flex-none px-4 py-2.5 rounded-xl text-sm font-semibold border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-copy text-cplm-pink"></i> Copiar Día
+                    </button>
+                    <button onclick="closeModal()" class="flex-1 sm:flex-none px-6 py-2.5 rounded-xl text-sm font-bold bg-gradient-to-r from-cplm-pink to-cplm-purple hover:opacity-95 text-white transition shadow-lg glow-pink">
+                        Guardar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 bg-cplm-navy text-white border border-cplm-pink/30 px-4 py-3 rounded-2xl shadow-2xl flex items-center gap-3 transform translate-y-24 opacity-0 transition-all duration-300">
+        <i id="toastIcon" class="fa-solid fa-circle-check text-cplm-pinkGlow text-xl"></i>
+        <span id="toastMessage" class="text-sm font-semibold">Acción completada</span>
+    </div>
+
+    <!-- App Data & Scripts -->
+    <script>
+        // Structured Devotional Content following Hillsong's "Una carrera que trasciende"
+        const weeksData = [
+            {
+                week: 1,
+                title: "SEMANA 1: LA LÍNEA DE PARTIDA",
+                subtitle: "Visión, fe y preparación del corazón",
+                days: [
+                    {
+                        day: 1,
+                        title: "Todo comienza con un paso",
+                        verse: "Zacarías 4:10",
+                        question: "¿Qué paso de fe sientes que Dios te está inviting a dar hoy?",
+                        devotional: "Toda maratón comienza de la misma manera: con un primer paso. Antes de los kilómetros recorridos, antes de la resistencia desarrollada y antes de llegar a la meta, alguien tomó la decisión de comenzar. En la vida de fe, Dios a menudo nos llama a dar el primer paso antes de mostrarnos todo el camino. El comienzo puede parecer pequeño, pero en las manos de Dios tiene el potencial de transformar tu futuro.",
+                        prayer: "Señor, dame valentía para dar el primer paso que hoy me estás mostrando. Ayúdame a confiar en ti aun cuando el comienzo parezca pequeño. En el nombre de Jesús, amén."
+                    },
+                    {
+                        day: 2,
+                        title: "Limpiando el camino",
+                        verse: "Hebreos 12:1",
+                        question: "¿Qué peso o distracción necesitas soltar antes de avanzar en esta carrera?",
+                        devotional: "Un corredor no lleva equipaje innecesario a la pista; cada gramo de más le resta velocidad y energía. De la misma forma, para correr la carrera que trasciende necesitamos despojarnos de todo peso, culpa pasada o distracción espiritual que nos impida avanzar con libertad hacia la meta.",
+                        prayer: "Padre, te entrego mis cargas, temores y distracciones. Limpia mi corazón para correr ligero y enfocado en tu propósito para mi vida."
+                    },
+                    {
+                        day: 3,
+                        title: "Fijar la mirada",
+                        verse: "Hebreos 12:2",
+                        question: "¿En qué o en quién está enfocada tu mirada hoy?",
+                        devotional: "Si miras a los lados mientras corres, corres el riesgo de tropezar. Si miras atrás, pierdes velocidad. El secreto del corredor de fe es mantener la mirada fija en el autor y consumador de la fe: Jesús. Él ya recorrió la pista y aseguró nuestra victoria.",
+                        prayer: "Jesús, aparto mis ojos de las circunstancias cambiantes y los fijo en ti. Que seas tú mi única guía e inspiración diaria."
+                    },
+                    {
+                        day: 4,
+                        title: "El ritmo del corazón",
+                        verse: "Proverbios 4:23",
+                        question: "¿Cómo estás guardando tu corazón en este tiempo de oración?",
+                        devotional: "El ritmo cardíaco determina el rendimiento físico de un atleta. Espiritualmente, la salud de nuestro corazón determina todo lo que fluye en nuestra vida. Guardar el corazón no es cerrarlo, sino protegerlo con la verdad de Dios y llenarlo de su presencia.",
+                        prayer: "Señor, examina mi corazón. Quita todo resentimiento y llénalo de tu paz, amor y pureza para mantener un ritmo firme."
+                    },
+                    {
+                        day: 5,
+                        title: "La visión que te impulsa",
+                        verse: "Habacuc 2:2-3",
+                        question: "¿Cuál es la visión que Dios ha puesto en tu espíritu para este tiempo?",
+                        devotional: "Correr sin visión es simplemente cansarse sin propósito. La visión dada por Dios te da resistencia cuando la fatiga aparece y te recuerda que tu esfuerzo no es en vano. Escribe la visión y ten presente el destino al que Dios te lleva.",
+                        prayer: "Dios de promesa, clarifica mi visión espiritual. Ayúdame a recordar tus promesas cuando enfrente momentos de cansancio."
+                    },
+                    {
+                        day: 6,
+                        title: "Nutrición para la fe",
+                        verse: "Mateo 4:4",
+                        question: "¿De qué estás alimentando tu espíritu diariamente?",
+                        devotional: "Ningún atleta puede competir con una mala alimentación. Tu espíritu necesita el alimento diario de la Palabra de Dios para mantenerse fuerte ante las pruebas. Leer la Biblia no es solo un hábito, es el combustible esencial de tu victoria.",
+                        prayer: "Señor, dame un hambre renovada por tu Palabra. Que tus escrituras sean mi alimento diario y la fuerza de mi vida."
+                    },
+                    {
+                        day: 7,
+                        title: "El descanso estratégico",
+                        verse: "Salmo 23:2-3",
+                        question: "¿Estás permitiendo que Dios renueve tus fuerzas en su presencia?",
+                        devotional: "En el entrenamiento de alto rendimiento, el descanso es tan vital como el ejercicio. Detenerse a adorar y renovar fuerzas en la presencia de Dios no es perder tiempo; es recargar el alma para poder correr con mayor fuerza el tramo que sigue.",
+                        prayer: "Padre, descanso en tu presencia hoy. Renueva mis fuerzas, restaura mi mente y llena mi vida con tu Santo Espíritu."
+                    }
+                ]
+            },
+            {
+                week: 2,
+                title: "SEMANA 2: MANTENER EL RITMO",
+                subtitle: "Perseverancia, comunidad y obediencia",
+                days: [
+                    {
+                        day: 8,
+                        title: "Vencer el muro del cansancio",
+                        verse: "Gálatas 6:9",
+                        question: "¿En qué área te sientes tentado a rendirte y necesitas perseverar?",
+                        devotional: "Los maratonistas conocen bien 'el muro': ese punto en la carrera donde el cuerpo exige parar. Es en ese preciso momento donde la disciplina supera a la emoción. En el espíritu, cuando sentimos ganas de desmayar, es cuando la gracia de Dios se perfecciona en nuestra debilidad.",
+                        prayer: "Señor, dame resistencia cuando enfrente el cansancio. No me dejes desmayar antes de ver el fruto de mi siembra."
+                    },
+                    {
+                        day: 9,
+                        title: "Correr en equipo",
+                        verse: "Eclesiastés 4:9-10",
+                        question: "¿Con quiénes estás corriendo esta carrera de fe?",
+                        devotional: "Nadie corre una carrera trascendente en soledad. La iglesia y la comunidad de fe son la manada que nos sostiene, nos anima cuando caemos y nos empuja hacia adelante. Rodéate de personas que eleven tu fe y te acerquen a Jesús.",
+                        prayer: "Gracias Señor por la comunidad e iglesia que me rodea. Ayúdame a ser un apoyo para otros y a recibir ayuda cuando la necesite."
+                    },
+                    {
+                        day: 10,
+                        title: "Obediencia a cada paso",
+                        verse: "Juan 14:15",
+                        question: "¿Qué instrucción específica de Dios requiere tu obediencia hoy?",
+                        devotional: "El ritmo constante de la carrera se construye paso a paso a través de pequeñas decisiones diarias de obediencia. Dios no busca grandes discursos, sino un corazón dispuesto a escuchar su voz y obedecer al instante.",
+                        prayer: "Padre celestial, doto mi corazón de un espíritu enseñable. Que mi amor por ti se refleje en mi obediencia a tu voz."
+                    },
+                    {
+                        day: 11,
+                        title: "Resistencia en la prueba",
+                        verse: "Santiago 1:2-4",
+                        question: "¿Qué enseñanza o madurez está produciendo Dios en tu prueba actual?",
+                        devotional: "Las colinas y los terrenos difíciles no se diseñan para destruirte, sino para fortalecer tus músculos. Cada prueba que superas con la ayuda de Dios produce una paciencia y carácter maduro que nada más te puede dar.",
+                        prayer: "Señor, confío en que estás moldeando mi carácter. Dame paciencia para atravesar la prueba sabiendo que la victoria es tuya."
+                    },
+                    {
+                        day: 12,
+                        title: "El poder del estímulo",
+                        verse: "Hebreos 10:24-25",
+                        question: "¿A quién puedes animar o levantar el ánimo en el día de hoy?",
+                        devotional: "Un aplauso o una palabra de aliento a mitad de la carrera puede cambiarlo todo para un corredor agotado. Dios te ha colocado en medio de otras personas para ser una fuente de aliento, fe y afirmación para sus vidas.",
+                        prayer: "Señor, pon palabras de gracia y aliento en mis labios. Usa mi vida para renovar las fuerzas de quienes me rodean."
+                    },
+                    {
+                        day: 13,
+                        title: "Alineación en la tormenta",
+                        verse: "Mateo 7:24-25",
+                        question: "¿Está tu vida cimentada sobre la roca firme de Cristo?",
+                        devotional: "Los vientos contrarios y el clima adverso son inevitables en la pista. Lo que garantiza que no seas arrastrado es la solidez de tu fundamento. Cuando tu casa está construida sobre la roca de la Palabra, permaneces firme.",
+                        prayer: "Jesús, tú eres mi roca y mi refugio. En medio de cualquier tormenta, decido permanecer firme y seguro en ti."
+                    },
+                    {
+                        day: 14,
+                        title: "La fuerza del perdón",
+                        verse: "Colosenses 3:13",
+                        question: "¿Necesitas soltar alguna ofensa para seguir corriendo libremente?",
+                        devotional: "Guardar ofensas es como correr con piedras en las zapatillas. Cada paso se vuelve doloroso y lento. El perdón es la decisión de soltar esa carga para correr libre y experimentar el amor sanador del Padre.",
+                        prayer: "Padre, elijo perdonar de corazón a quienes me han herido. Suelto toda amargura y recibo tu sanidad interior."
+                    }
+                ]
+            },
+            {
+                week: 3,
+                title: "SEMANA 3: CRUZAR LA META",
+                subtitle: "Generosidad, legado y las próximas generaciones",
+                days: [
+                    {
+                        day: 15,
+                        title: "Generosidad que abre caminos",
+                        verse: "2 Corintios 9:6-7",
+                        question: "¿Cómo puedes manifestar una generosidad radical en este tiempo?",
+                        devotional: "Llegar a la meta de una carrera que trasciende requiere un corazón generoso. Cuando sembramos con desprendimiento en el Reino de Dios, no solo bendecimos a otros, sino que desatamos una cosecha de bendición para nuestro propio futuro.",
+                        prayer: "Señor, dame un corazón generoso y alegre. Que mi vida y recursos sean canales de bendición para tu iglesia y ciudad."
+                    },
+                    {
+                        day: 16,
+                        title: "Pasar la antorcha",
+                        verse: "2 Timoteo 2:2",
+                        question: "¿A quién estás preparando o mentoreando para el futuro?",
+                        devotional: "Una carrera que trasciende no termina en ti; se mide por la capacidad de entregar la antorcha a la siguiente generación. Invierte tu tiempo, sabiduría y fe en los jóvenes y niños que vendrán detrás de ti.",
+                        prayer: "Padre, ayúdame a ser un buen ejemplo y mentor. Que mi fe inspire a las nuevas generaciones a buscarte con pasión."
+                    },
+                    {
+                        day: 17,
+                        title: "Impacto en la ciudad",
+                        verse: "Jeremías 29:7",
+                        question: "¿De qué manera práctica estás siendo luz en tu entorno y ciudad?",
+                        devotional: "Dios no nos llamó a correr aislados del mundo, sino a influir activamente en nuestra ciudad con amor, servicio e impacto social. Nuestra carrera tiene significado cuando transforma nuestro vecindario.",
+                        prayer: "Señor, bendigo mi ciudad y mi comunidad. Úsame para llevar alivio, justicia, esperanza y tu amor a quienes lo necesitan."
+                    },
+                    {
+                        day: 18,
+                        title: "Provisión para la misión",
+                        verse: "Filipenses 4:19",
+                        question: "¿Estás creyendo por milagros de provisión para cumplir la gran comisión?",
+                        devotional: "La misión de Dios jamás carece del respaldo de Dios. Cuando ponemos su Reino en primer lugar, Él promete suplir abundantemente todo lo que necesitamos para llevar a cabo su obra en la tierra.",
+                        prayer: "Dios proveedor, confío en tu fidelidad financiera y espiritual. Desata provisión abundante para cumplir tu propósito."
+                    },
+                    {
+                        day: 19,
+                        title: "Fruto que permanece",
+                        verse: "Juan 15:16",
+                        question: "¿Qué fruto eterno está produciendo tu vida hoy?",
+                        devotional: "Los trofeos terrenales se oxidan y el aplauso humano se apaga, pero el fruto de almas alcanzadas y vidas transformadas para Cristo permanece por la eternidad. Corre por la recompensa eterna.",
+                        prayer: "Jesús, conéctame a la vid verdadera. Quiero dar fruto abundante y permanente que traiga gloria a tu Santo Nombre."
+                    },
+                    {
+                        day: 20,
+                        title: "Construyendo un legado",
+                        verse: "Salmo 102:18",
+                        question: "¿Qué historia de fe estás escribiendo para los que vendrán después?",
+                        devotional: "Cerca de la meta, miramos hacia atrás con gratitud y hacia adelante con esperanza. Cada oración, cada sacrificio y cada acto de fe está construyendo un cimiento sólido sobre el cual edificarán tus hijos y nietos.",
+                        prayer: "Señor, consagro mi vida para dejar un legado de fe incuestionable. Que mi testimonio honre a tu nombre por generaciones."
+                    },
+                    {
+                        day: 21,
+                        title: "Cruzando la meta con gozo",
+                        verse: "2 Timoteo 4:7-8",
+                        question: "¿Con qué actitud te preparas para continuar viviendo esta carrera trascendente?",
+                        devotional: "¡Has completado estos 21 días! Pero cruzar esta meta es solo el inicio de un nuevo nivel en tu caminata con Dios. Has peleado la buena batalla, has guardado la fe y continuaremos corriendo juntos hacia lo que Dios tiene preparado.",
+                        prayer: "¡Gracias Padre por estos 21 días de bendición! Mantén mi fuego encendido para seguir corriendo con paciencia y victoria. En el nombre de Jesús, amén."
+                    }
+                ]
+            }
+        ];
+
+        // Flatten data for quick indexing
+        let allDays = [];
+        weeksData.forEach(w => {
+            w.days.forEach(d => {
+                allDays.push({ ...d, weekNum: w.week });
+            });
+        });
+
+        // App State
+        let appState = {
+            completedDays: {},
+            notes: {},
+            currentFilter: 'all',
+            activeDay: 1
+        };
+
+        // Initialize Application
+        window.addEventListener('DOMContentLoaded', () => {
+            loadSavedTheme();
+            loadSavedState();
+            renderWeeksGrid();
+            updateProgress();
+
+            const notesArea = document.getElementById('modalNotes');
+            notesArea.addEventListener('input', (e) => {
+                const day = appState.activeDay;
+                appState.notes[day] = e.target.value;
+                saveState();
+                updateCharCount(e.target.value.length);
+                
+                const saveStatus = document.getElementById('saveStatus');
+                saveStatus.innerHTML = `<i class="fa-solid fa-arrows-rotate animate-spin text-cplm-pink"></i> Guardando...`;
+                
+                clearTimeout(window.saveTimer);
+                window.saveTimer = setTimeout(() => {
+                    saveStatus.innerHTML = `<i class="fa-solid fa-check text-emerald-500"></i> Guardado`;
+                    renderWeeksGrid();
+                }, 400);
+            });
+        });
+
+        function loadSavedState() {
+            try {
+                const savedCompleted = localStorage.getItem('cplm_21_completed');
+                const savedNotes = localStorage.getItem('cplm_21_notes');
+                
+                if (savedCompleted) appState.completedDays = JSON.parse(savedCompleted);
+                if (savedNotes) appState.notes = JSON.parse(savedNotes);
+            } catch (e) {
+                console.error("Error cargando estado:", e);
+            }
+        }
+
+        function saveState() {
+            try {
+                localStorage.setItem('cplm_21_completed', JSON.stringify(appState.completedDays));
+                localStorage.setItem('cplm_21_notes', JSON.stringify(appState.notes));
+            } catch (e) {
+                console.error("Error guardando estado:", e);
+            }
+        }
+
+        function toggleTheme() {
+            const html = document.documentElement;
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+                localStorage.setItem('cplm_theme', 'light');
+            } else {
+                html.classList.add('dark');
+                localStorage.setItem('cplm_theme', 'dark');
+            }
+        }
+
+        function loadSavedTheme() {
+            const savedTheme = localStorage.getItem('cplm_theme');
+            if (savedTheme === 'light') {
+                document.documentElement.classList.remove('dark');
+            } else {
+                document.documentElement.classList.add('dark');
+            }
+        }
+
+        function setFilter(filter) {
+            appState.currentFilter = filter;
+            
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('bg-cplm-pink', 'text-white', 'shadow-md');
+                btn.classList.add('bg-white', 'dark:bg-cplm-cardBg', 'text-slate-600', 'dark:text-slate-300');
+            });
+
+            const activeBtnId = filter === 'all' ? 'filterAll' : filter === 'pending' ? 'filterPending' : 'filterCompleted';
+            const activeBtn = document.getElementById(activeBtnId);
+            if (activeBtn) {
+                activeBtn.classList.remove('bg-white', 'dark:bg-cplm-cardBg', 'text-slate-600', 'dark:text-slate-300');
+                activeBtn.classList.add('bg-cplm-pink', 'text-white', 'shadow-md');
+            }
+
+            renderWeeksGrid();
+        }
+
+        function renderWeeksGrid() {
+            const container = document.getElementById('weeksContainer');
+            container.innerHTML = '';
+
+            weeksData.forEach(weekInfo => {
+                // Filter days inside week
+                const filteredDays = weekInfo.days.filter(item => {
+                    const isCompleted = !!appState.completedDays[item.day];
+                    if (appState.currentFilter === 'pending' && isCompleted) return false;
+                    if (appState.currentFilter === 'completed' && !isCompleted) return false;
+                    return true;
+                });
+
+                if (filteredDays.length === 0) return;
+
+                const weekSection = document.createElement('div');
+                weekSection.className = 'space-y-4';
+
+                weekSection.innerHTML = `
+                    <div class="border-b border-slate-200 dark:border-slate-800/80 pb-3">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h4 class="font-serif text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">${weekInfo.title}</h4>
+                                <p class="text-xs text-cplm-pink dark:text-cplm-pinkGlow font-semibold">${weekInfo.subtitle}</p>
+                            </div>
+                            <span class="text-xs font-bold text-slate-400 dark:text-slate-500 bg-slate-100 dark:bg-cplm-cardBg px-3 py-1 rounded-full">Días ${weekInfo.days[0].day} - ${weekInfo.days[weekInfo.days.length - 1].day}</span>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5" id="weekGrid-${weekInfo.week}"></div>
+                `;
+
+                container.appendChild(weekSection);
+
+                const weekGrid = document.getElementById(`weekGrid-${weekInfo.week}`);
+
+                filteredDays.forEach(item => {
+                    const isCompleted = !!appState.completedDays[item.day];
+                    const hasNote = !!(appState.notes[item.day] && appState.notes[item.day].trim() !== '');
+                    const dayFormatted = item.day < 10 ? `0${item.day}` : item.day;
+
+                    const card = document.createElement('div');
+                    card.className = `group relative bg-white dark:bg-cplm-cardBg border rounded-3xl p-5 shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col justify-between glow-pink-hover ${
+                        isCompleted 
+                            ? 'border-cplm-pink/40 bg-gradient-to-b from-cplm-softPink/30 to-white dark:from-cplm-magenta/10 dark:to-cplm-cardBg' 
+                            : 'border-slate-200 dark:border-slate-800 hover:border-cplm-pink/60'
+                    }`;
+
+                    card.onclick = () => openModal(item.day);
+
+                    card.innerHTML = `
+                        <div>
+                            <div class="flex items-center justify-between mb-3.5">
+                                <span class="text-xs font-extrabold px-3 py-1 rounded-full ${
+                                    isCompleted 
+                                        ? 'bg-cplm-pink text-white shadow-sm' 
+                                        : 'bg-slate-100 dark:bg-slate-800 text-cplm-pink dark:text-cplm-pinkGlow'
+                                }">
+                                    DÍA ${dayFormatted}
+                                </span>
+                                
+                                <button onclick="event.stopPropagation(); toggleDayStatus(${item.day})" class="w-8 h-8 rounded-full flex items-center justify-center transition ${
+                                    isCompleted 
+                                        ? 'bg-emerald-500 text-white shadow-md' 
+                                        : 'text-slate-300 dark:text-slate-600 hover:text-cplm-pink dark:hover:text-cplm-pinkGlow hover:bg-cplm-softPink/40 dark:hover:bg-slate-800'
+                                }" title="${isCompleted ? 'Marcar como pendiente' : 'Marcar como completado'}">
+                                    <i class="fa-solid ${isCompleted ? 'fa-check' : 'fa-circle'} text-xs"></i>
+                                </button>
+                            </div>
+
+                            <h4 class="font-serif font-bold text-lg text-slate-900 dark:text-slate-100 group-hover:text-cplm-pink dark:group-hover:text-cplm-pinkGlow transition mb-1 line-clamp-1">
+                                ${item.title}
+                            </h4>
+                            <p class="text-xs text-cplm-pink dark:text-cplm-pinkGlow font-medium italic mb-2">
+                                ${item.verse}
+                            </p>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 line-clamp-2 mb-4 font-sans leading-relaxed">
+                                "${item.question}"
+                            </p>
+                        </div>
+
+                        <div class="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-medium text-slate-400 dark:text-slate-500">
+                            <span class="flex items-center gap-1.5">
+                                <i class="fa-solid ${hasNote ? 'fa-book-bookmark text-cplm-pink' : 'fa-pen text-slate-300 dark:text-slate-600'}"></i>
+                                ${hasNote ? 'Nota guardada' : 'Escribir notas'}
+                            </span>
+                            <i class="fa-solid fa-arrow-right text-slate-300 dark:text-slate-600 group-hover:translate-x-1 group-hover:text-cplm-pink transition-all"></i>
+                        </div>
+                    `;
+
+                    weekGrid.appendChild(card);
+                });
+            });
+        }
+
+        function toggleDayStatus(day) {
+            appState.completedDays[day] = !appState.completedDays[day];
+            saveState();
+            updateProgress();
+            renderWeeksGrid();
+            
+            if (appState.activeDay === day) {
+                updateModalStatusUI(day);
+            }
+
+            const isDone = appState.completedDays[day];
+            showToast(isDone ? `Día ${day} marcado como completado` : `Día ${day} marcado como pendiente`, isDone ? 'success' : 'info');
+        }
+
+        function toggleCurrentDayComplete() {
+            toggleDayStatus(appState.activeDay);
+        }
+
+        function updateProgress() {
+            const total = 21;
+            const completedCount = Object.keys(appState.completedDays).filter(day => appState.completedDays[day]).length;
+            const percentage = Math.round((completedCount / total) * 100);
+
+            document.getElementById('completedCount').innerText = completedCount;
+            document.getElementById('progressPercent').innerText = `${percentage}%`;
+            document.getElementById('progressBar').style.width = `${percentage}%`;
+        }
+
+        function openModal(dayNumber) {
+            appState.activeDay = dayNumber;
+            const dayInfo = allDays.find(d => d.day === dayNumber);
+            if (!dayInfo) return;
+
+            const dayFormatted = dayInfo.day < 10 ? `0${dayInfo.day}` : dayInfo.day;
+            document.getElementById('modalWeekTag').innerText = `SEMANA ${dayInfo.weekNum}`;
+            document.getElementById('modalDayBadge').innerText = `DÍA ${dayFormatted}`;
+            document.getElementById('modalDayTitle').innerText = dayInfo.title;
+            document.getElementById('modalVerse').innerText = dayInfo.verse;
+            document.getElementById('modalQuestion').innerText = `"${dayInfo.question}"`;
+            document.getElementById('modalDevotional').innerText = dayInfo.devotional;
+            document.getElementById('modalPrayer').innerText = dayInfo.prayer;
+            
+            const currentNote = appState.notes[dayNumber] || '';
+            const notesElem = document.getElementById('modalNotes');
+            notesElem.value = currentNote;
+            updateCharCount(currentNote.length);
+
+            updateModalStatusUI(dayNumber);
+
+            const modal = document.getElementById('dayModal');
+            const container = document.getElementById('modalContainer');
+            
+            modal.classList.remove('pointer-events-none', 'opacity-0');
+            modal.classList.add('opacity-100');
+            container.classList.remove('scale-95');
+            container.classList.add('scale-100');
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('dayModal');
+            const container = document.getElementById('modalContainer');
+
+            modal.classList.remove('opacity-100');
+            modal.classList.add('opacity-0');
+            container.classList.remove('scale-100');
+            container.classList.add('scale-95');
+
+            setTimeout(() => {
+                modal.classList.add('pointer-events-none');
+            }, 300);
+
+            renderWeeksGrid();
+        }
+
+        function updateModalStatusUI(dayNumber) {
+            const isCompleted = !!appState.completedDays[dayNumber];
+            const statusBadge = document.getElementById('modalStatusBadge');
+            const toggleBtn = document.getElementById('toggleCompleteBtn');
+
+            if (isCompleted) {
+                statusBadge.className = "text-xs font-bold text-emerald-500 flex items-center gap-1.5 ml-2";
+                statusBadge.innerHTML = `<i class="fa-solid fa-circle-check"></i> Completado`;
+
+                toggleBtn.className = "w-full sm:w-auto px-4 py-2.5 rounded-xl text-sm font-bold bg-emerald-500/15 text-emerald-600 dark:text-emerald-400 border border-emerald-500/30 transition flex items-center justify-center gap-2";
+                toggleBtn.innerHTML = `<i class="fa-solid fa-check-double"></i> Marcar como Pendiente`;
+            } else {
+                statusBadge.className = "text-xs font-bold text-slate-400 flex items-center gap-1.5 ml-2";
+                statusBadge.innerHTML = `<i class="fa-regular fa-circle"></i> Pendiente`;
+
+                toggleBtn.className = "w-full sm:w-auto px-4 py-2.5 rounded-xl text-sm font-bold bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200 dark:border-slate-700 transition flex items-center justify-center gap-2";
+                toggleBtn.innerHTML = `<i class="fa-regular fa-circle-check text-cplm-pink"></i> Completar Día`;
+            }
+        }
+
+        function updateCharCount(count) {
+            document.getElementById('charCount').innerText = `${count} caracteres`;
+        }
+
+        function exportData() {
+            let exportText = "=========================================\n";
+            exportText += "    21 DÍAS DE ORACIÓN - UNA CARRERA QUE TRASCIENDE  \n";
+            exportText += "               DEVOCIONAL HILLSONG              \n";
+            exportText += "=========================================\n\n";
+
+            allDays.forEach(item => {
+                const status = appState.completedDays[item.day] ? "[COMPLETADO]" : "[PENDIENTE]";
+                const note = appState.notes[item.day] || "(Sin notas registradas)";
+
+                exportText += `DÍA ${item.day}: ${item.title.toUpperCase()} ${status}\n`;
+                exportText += `Escritura: ${item.verse}\n`;
+                exportText += `Reflexión: ${item.question}\n`;
+                exportText += `Oración: ${item.prayer}\n`;
+                exportText += `Mis Notas:\n${note}\n`;
+                exportText += "-----------------------------------------\n\n";
+            });
+
+            const blob = new Blob([exportText], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `Carrera_Que_Trasciende_21_Dias_${new Date().toISOString().slice(0, 10)}.txt`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            showToast("Diario de Oración exportado con éxito", "success");
+        }
+
+        function copyAllNotes() {
+            let fullText = "21 DÍAS DE ORACIÓN - UNA CARRERA QUE TRASCIENDE\n\n";
+
+            allDays.forEach(item => {
+                const note = appState.notes[item.day];
+                if (note && note.trim() !== '') {
+                    fullText += `--- DÍA ${item.day}: ${item.title} (${item.verse}) ---\n`;
+                    fullText += `${note}\n\n`;
+                }
+            });
+
+            if (fullText.trim() === "21 DÍAS DE ORACIÓN - UNA CARRERA QUE TRASCIENDE") {
+                showToast("Aún no tienes notas escritas para copiar", "info");
+                return;
+            }
+
+            copyToClipboard(fullText);
+            showToast("Notas copiadas al portapapeles", "success");
+        }
+
+        function copySingleNote() {
+            const day = appState.activeDay;
+            const item = allDays.find(d => d.day === day);
+            const note = appState.notes[day];
+
+            if (!note || note.trim() === '') {
+                showToast("No hay notas escritas para este día", "info");
+                return;
+            }
+
+            const text = `Día ${day}: ${item.title} (${item.verse})\nPregunta: ${item.question}\n\nMis Notas:\n${note}`;
+            copyToClipboard(text);
+            showToast(`Notas del Día ${day} copiadas`, "success");
+        }
+
+        function copyToClipboard(text) {
+            const textarea = document.createElement('textarea');
+            textarea.value = text;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+            } catch (err) {
+                console.error('Error al copiar texto:', err);
+            }
+            document.body.removeChild(textarea);
+        }
+
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMessage');
+            const toastIcon = document.getElementById('toastIcon');
+
+            toastMsg.innerText = message;
+            toastIcon.className = type === 'success' 
+                ? "fa-solid fa-circle-check text-cplm-pinkGlow text-lg" 
+                : "fa-solid fa-circle-info text-cplm-purple text-lg";
+
+            toast.classList.remove('translate-y-24', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            clearTimeout(window.toastTimer);
+            window.toastTimer = setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-24', 'opacity-0');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
